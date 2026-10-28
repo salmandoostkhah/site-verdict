@@ -1,6 +1,6 @@
 ﻿#!/usr/bin/env python3
 """
-SEO Audit CLI — aligned with models.py field names (all AttributeErrors fixed).
+Site Verdict CLI — aligned with models.py field names (all AttributeErrors fixed).
 """
 import argparse
 import asyncio
@@ -213,7 +213,7 @@ def _force_utf8_output() -> None:
 
 def main(argv: list[str] | None = None) -> None:
     _force_utf8_output()
-    parser = argparse.ArgumentParser(prog="cli.py", description="SEO Audit CLI")
+    parser = argparse.ArgumentParser(prog="cli.py", description="Site Verdict CLI")
     parser.add_argument("url", help="URL to audit (http/https)")
     parser.add_argument("-o", "--output", help="save report to file (.json / .html)")
     parser.add_argument("-f", "--format", choices=SUPPORTED_FORMATS,
