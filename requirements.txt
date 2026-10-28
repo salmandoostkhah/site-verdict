@@ -1,0 +1,14 @@
+﻿# Web Framework & UI
+streamlit>=1.35.0
+
+# HTTP Client & Networking
+httpx[http2]>=0.27.0
+brotli>=1.1.0
+
+# HTML Parsing & Scraping
+beautifulsoup4>=4.12.3
+lxml>=5.1.0
+
+# Data Validation & Configuration
+pydantic>=2.6.0
+pydantic-settings>=2.2.0

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "site-verdict"
+version = "0.1.0"
+description = "Free SEO and local SEO audit tool with a Streamlit UI and CLI (Persian/English)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit>=1.35.0",
+    "httpx[http2]>=0.27.0",
+    "brotli>=1.1.0",
+    "beautifulsoup4>=4.12.3",
+    "lxml>=5.1.0",
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+seo-audit = "cli:main"
+
+[tool.setuptools]
+py-modules = ["app", "cli"]
+
+[tool.setuptools.packages.find]
+include = ["config*", "seo_core*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
