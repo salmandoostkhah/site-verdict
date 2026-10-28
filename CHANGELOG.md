@@ -47,4 +47,4 @@ Versions follow the phase plan. Each completed roadmap task in Phase 0 gets its 
 
     0.1.0: infrastructure basics (BOM removal, .gitignore, LICENSE, README, pyproject, CI). Done.
     0.2.0 to 0.6.0: pipeline and plugin registry, storage layer, project config, structured logging and issue codes, integration fixture server.
-    1.0.0 criteria: Phases 0 to 3 complete, CI green on Ubuntu and Windows, stable CLI/API, and acceptable test coverage and security review.
+    1.0.0 criteria: Phases 0 to 3 complete, CI green on Ubuntu and Windows, stable CLI and public API, and a security review completed.
