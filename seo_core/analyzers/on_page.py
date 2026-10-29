@@ -80,7 +80,7 @@ def analyze(html: str) -> Tuple[OnPageMetrics, List[str], List[str], int]:
         unneeded_tag.decompose()
 
     clean_text = text_soup.get_text(separator=" ", strip=True)
-    all_words = re.findall(r"\b[a-zA-Z\u0621-\u063A\u0641-\u064A\u0671-\u06D3\u06D5]{3,}\b", clean_text)
+    all_words = re.findall(r"\b[a-zA-Z\u0621-\u063A\u0641-\u064A\u0671-\u06D3\u06D5\u200c]{3,}\b", clean_text)
 
     word_count = len(all_words)
 

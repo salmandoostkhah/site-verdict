@@ -57,6 +57,14 @@ def test_word_count_ignores_digits_and_tatweel():
     assert m.content.word_count == 3  # سلام، دنیا، abc
 
 
+def test_word_count_keeps_zwnj_words_whole():
+    # «می‌خواهم» با نیم‌فاصله یک کلمه است، نه «خواهم» به‌تنهایی
+    text = "می\u200cخواهم کتاب\u200cها"
+    html = f"<html lang='fa'><body><p>{text}</p></body></html>"
+    m = on_page.analyze(html)[0]
+    assert m.content.word_count == 2
+
+
 # ---------- images ----------
 
 def test_images_counts():
