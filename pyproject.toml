@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "site-verdict"
-version = "0.1.0"
+version = "0.2.0"
 description = "Free SEO audit tool (optional local business checks) with a Streamlit UI and CLI (Persian/English)."
 readme = "README.md"
 requires-python = ">=3.10"

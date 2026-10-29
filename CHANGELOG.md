@@ -2,7 +2,7 @@ Changelog
 
 All notable changes to this project are documented here.
 The format follows Keep a Changelog.
-[Unreleased]
+[0.2.0] - 2026-10-29
 Changed
 
     Audits run through an explicit stage pipeline (seo_core/pipeline.py, seo_core/stages.py); analyzer calls go through seo_core/invoke.py.
