@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "site-verdict"
 version = "0.1.0"
-description = "Free SEO and local SEO audit tool with a Streamlit UI and CLI (Persian/English)."
+description = "Free SEO audit tool (optional local business checks) with a Streamlit UI and CLI (Persian/English)."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -22,7 +22,7 @@ dependencies = [
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-seo-audit = "cli:main"
+site-verdict = "cli:main"
 
 [tool.setuptools]
 py-modules = ["app", "cli"]

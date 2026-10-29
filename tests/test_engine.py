@@ -4,7 +4,8 @@ import socket
 import httpx
 import pytest
 
-from seo_core import engine
+from seo_core import engine, invoke, pipeline
+from seo_core.stages import default_resolver
 from seo_core.engine import AuditEngine
 from seo_core.safe_http import SSRFSecurityError, is_safe_url, resolve_validated_ips
 from seo_core.models import AuditReport
@@ -12,6 +13,13 @@ from seo_core.models import AuditReport
 
 def _audit(url="https://example.com/"):
     return asyncio.run(AuditEngine(url).audit())
+
+
+def _audit_broken_on_page(broken, url="https://example.com/"):
+    def resolve(name):
+        return broken if name == "on_page" else default_resolver(name)
+
+    return asyncio.run(AuditEngine(url, resolver=resolve).audit())
 
 
 def _safe(url):
@@ -109,8 +117,7 @@ def test_analyzer_failure_does_not_crash(mock_http, monkeypatch):
     def broken(*a, **k):
         raise ValueError("boom")
 
-    monkeypatch.setattr(engine, "analyze_on_page", broken)
-    r = _audit()
+    r = _audit_broken_on_page(broken)
     assert r.status == "success"
     assert r.on_page.h1_count == 0
     # شکست تحلیل‌گر نباید بی‌صدا باشد: ثبت در گزارش + کاهش نمره
@@ -122,12 +129,11 @@ def test_analyzer_failure_lowers_score(mock_http, monkeypatch):
     def broken(*a, **k):
         raise ValueError("boom")
 
-    monkeypatch.setattr(engine, "analyze_on_page", broken)
-    monkeypatch.setattr(engine, "INCOMPLETE_AUDIT_SCORE_CAP", 100)
-    monkeypatch.setattr(engine, "ANALYZER_FAILURE_PENALTY", 0)
-    without_penalty = _audit().score
-    monkeypatch.setattr(engine, "ANALYZER_FAILURE_PENALTY", 10)
-    with_penalty = _audit().score
+    monkeypatch.setattr(pipeline, "INCOMPLETE_AUDIT_SCORE_CAP", 100)
+    monkeypatch.setattr(pipeline, "STAGE_FAILURE_PENALTY", 0)
+    without_penalty = _audit_broken_on_page(broken).score
+    monkeypatch.setattr(pipeline, "STAGE_FAILURE_PENALTY", 10)
+    with_penalty = _audit_broken_on_page(broken).score
     assert without_penalty - with_penalty == 10
 
 
@@ -135,9 +141,8 @@ def test_failed_analyzer_caps_score(mock_http, monkeypatch):
     def broken(*a, **k):
         raise ValueError("boom")
 
-    monkeypatch.setattr(engine, "analyze_on_page", broken)
-    r = _audit()
-    assert r.score <= engine.INCOMPLETE_AUDIT_SCORE_CAP
+    r = _audit_broken_on_page(broken)
+    assert r.score <= pipeline.INCOMPLETE_AUDIT_SCORE_CAP
     assert r.overall_score == r.score
 
 
@@ -262,14 +267,14 @@ def test_invoke_analyzer_propagates_internal_type_error():
         raise TypeError("bug inside analyzer")
 
     with pytest.raises(TypeError, match="bug inside analyzer"):
-        asyncio.run(engine._invoke_analyzer(broken, "https://example.com", client=object()))
+        asyncio.run(invoke._invoke_analyzer(broken, "https://example.com", client=object()))
 
 
 def test_invoke_analyzer_filters_unsupported_kwargs():
     def sync_fn(html, base_url=""):
         return ("ok", [], [], 0)
 
-    result = asyncio.run(engine._invoke_analyzer(sync_fn, "<html>", base_url="x", client=object()))
+    result = asyncio.run(invoke._invoke_analyzer(sync_fn, "<html>", base_url="x", client=object()))
     assert result == ("ok", [], [], 0)
 
 

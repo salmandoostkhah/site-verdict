@@ -1,8 +1,8 @@
 Site Verdict
 
-ابزار رایگان ممیزی سئو و سئوی محلی برای وب‌سایت‌ها، با رابط Streamlit و CLI. گزارش به فارسی و انگلیسی.
+ابزار رایگان ممیزی سئو (با بخش اختیاری سئوی محلی) برای وب‌سایت‌ها، با رابط Streamlit و CLI. گزارش به فارسی و انگلیسی.
 
-A free SEO and local SEO audit tool with a Streamlit dashboard and a command-line interface.
+A free SEO audit tool (with optional local business checks) with a Streamlit dashboard and a command-line interface.
 Features / امکانات
 
     On-page checks: title, meta description, headings, word count, favicon, canonical.
