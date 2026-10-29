@@ -10,6 +10,10 @@ Changed
     CLI entry point renamed to site-verdict (reinstall the package to update).
     CI runs on ubuntu-24.04 instead of ubuntu-latest.
 
+Fixed
+
+    Persian words joined by a zero-width non-joiner (e.g. می‌خواهم) are counted as one word instead of being split.
+
 [0.1.0] - Unreleased
 Added
 
