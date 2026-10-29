@@ -14,7 +14,7 @@ Fixed
 
     Persian words joined by a zero-width non-joiner (e.g. می‌خواهم) are counted as one word instead of being split.
 
-[0.1.0] - Unreleased
+[0.1.0] - 2026-10-28
 Added
 
     Local SEO analysis with auto-detection and manual override (--local / --non-local).
