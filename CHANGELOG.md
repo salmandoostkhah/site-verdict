@@ -2,6 +2,14 @@ Changelog
 
 All notable changes to this project are documented here.
 The format follows Keep a Changelog.
+[Unreleased]
+Changed
+
+    Audits run through an explicit stage pipeline (seo_core/pipeline.py, seo_core/stages.py); analyzer calls go through seo_core/invoke.py.
+    Duplicated analyzer-call helpers removed from seo_core/engine.py.
+    CLI entry point renamed to site-verdict (reinstall the package to update).
+    CI runs on ubuntu-24.04 instead of ubuntu-latest.
+
 [0.1.0] - Unreleased
 Added
 
