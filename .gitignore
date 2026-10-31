@@ -19,6 +19,7 @@ htmlcov/
 
 # Generated output
 reports/
+data/
 tools/test_out.*
 
 # Editors / OS

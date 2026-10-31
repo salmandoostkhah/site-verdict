@@ -30,6 +30,16 @@ python cli.py https://example.com
 python cli.py https://example.com -o report.json
 python cli.py https://example.com -f html -o report.html --local
 
+Storage (Python API): audits can be saved to a local SQLite database. The default path is data/site_verdict.db; set SITE_VERDICT_DB to change it.
+
+from seo_core.storage import Storage
+
+storage = Storage()
+audit_id = storage.save_audit(report)  # report: AuditReport
+storage.list_audits(url="https://example.com")
+storage.get_audit(audit_id)
+
+The web app and CLI do not save audits automatically yet.
 Tests / تست
 
 pip install -r requirements-dev.txt

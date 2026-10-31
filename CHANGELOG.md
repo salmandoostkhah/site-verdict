@@ -2,6 +2,11 @@ Changelog
 
 All notable changes to this project are documented here.
 The format follows Keep a Changelog.
+[0.3.0] - 2026-10-31
+Added
+
+    SQLite storage layer (seo_core/storage.py): Storage class with save_audit, list_audits (optional URL filter, newest first), and get_audit. Database defaults to data/site_verdict.db, overridable with the SITE_VERDICT_DB environment variable. Schema versioning is included.
+
 [0.2.0] - 2026-10-29
 Changed
 
@@ -40,23 +45,3 @@ Changed
 Fixed
 
     External links with status 0 were reported as broken.
-    Duplicate penalties for missing alt text.
-    Flaky test on attribute errors (isolated).
-    .elapsed RuntimeError when the response was not closed.
-    transport._pool coupling replaced with the public API.
-    Byte-order marks (BOM) removed from source files.
-    Several broad except Exception blocks narrowed to expected exceptions. Boundary blocks in engine, app, and CLI stay broad but log errors.
-
-Removed
-
-    Root-level try_reporter.py and check.json (moved to tools/).
-    Generated test outputs from the repository.
-    Version labels ("SEO-V2") in code and reports.
-
-Roadmap to 1.0.0
-
-Versions follow the phase plan. Each completed roadmap task in Phase 0 gets its own minor release; later phases are released per phase.
-
-    0.1.0: infrastructure basics (BOM removal, .gitignore, LICENSE, README, pyproject, CI). Done.
-    0.2.0 to 0.6.0: pipeline and plugin registry, storage layer, project config, structured logging and issue codes, integration fixture server.
-    1.0.0 criteria: Phases 0 to 3 complete, CI green on Ubuntu and Windows, stable CLI and public API, and a security review completed.
